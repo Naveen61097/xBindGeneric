@@ -1,0 +1,55 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App3"
+    x:Class="App3.Generic">
+
+    <local:DateToStringConverter
+        x:Key="DateToStringConverter" />
+
+    <Style
+        TargetType="local:DateRange">
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                    TargetType="local:DateRange">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition
+                                Height="Auto" />
+                            <RowDefinition
+                                Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock
+                            Text="{x:Bind Header, Mode=OneWay}" />
+                        <Grid
+                            Grid.Row="1"
+                            Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition
+                                    Width="*" />
+                                <ColumnDefinition
+                                    Width="Auto" />
+                                <ColumnDefinition
+                                    Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <CalendarDatePicker
+                                DateFormat="{x:Bind Format, Mode=OneWay}"
+                                Date="{x:Bind StartDate, Converter={StaticResource DateToStringConverter}, Mode=TwoWay}" />
+                            <TextBlock
+                                Grid.Column="1"
+                                Margin="12,4"
+                                Text="-" />
+                            <CalendarDatePicker
+                                Grid.Column="2"
+                                DateFormat="{x:Bind Format, Mode=OneWay}"
+                                Date="{x:Bind EndDate, Converter={StaticResource DateToStringConverter}, Mode=TwoWay}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
